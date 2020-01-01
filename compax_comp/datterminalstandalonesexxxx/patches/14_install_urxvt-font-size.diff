@@ -1,0 +1,20 @@
+Description: Install urxvt-font-size extension
+Author: Ryan Kavanagh <rak@debian.org>
+Origin: Debian
+Forwarded: not-needed
+Last-Update: 2018-01-02
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: rxvt-unicode/src/Makefile.in
+===================================================================
+--- rxvt-unicode.orig/src/Makefile.in	2016-01-23 15:09:22.000000000 -0500
++++ rxvt-unicode/src/Makefile.in	2018-01-02 15:11:55.910803007 -0500
+@@ -105,7 +105,7 @@
+ @IF_PERL@	$(INSTALL) -d $(DESTDIR)$(man1dir)
+ @IF_PERL@	$(INSTALL) -d $(DESTDIR)$(man3dir)
+ @IF_PERL@	$(INSTALL_DATA) $(srcdir)/urxvt.pm $(DESTDIR)$(libdir)/urxvt/urxvt.pm
+-@IF_PERL@	for ext in $(srcdir)/perl/*; do \
++@IF_PERL@	for ext in $(srcdir)/perl/* $(srcdir)/../debian/extensions/urxvt-font-size/font-size; do \
+ @IF_PERL@	   test -f "$$ext" || continue; \
+ @IF_PERL@	   base=`basename "$$ext"`; \
+ @IF_PERL@	   $(INSTALL_DATA) "$$ext" $(DESTDIR)$(libdir)/urxvt/perl/; \

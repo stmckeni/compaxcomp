@@ -1,0 +1,4 @@
+usr/bin/urxvt usr/bin/aterm-xterm
+usr/bin/urxvt usr/bin/aterm
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/aterm.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/aterm-xterm.1.gz

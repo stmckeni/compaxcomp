@@ -1,0 +1,9 @@
+The subtree debian/extensions/urxvt-font-size was added with the following
+command:
+
+    git subtree add \
+        --prefix=debian/extensions/urxvt-font-size \
+        --squash \
+        https://github.com/majutsushi/urxvt-font-size.git master
+
+ -- Ryan Kavanagh <rak@debian.org>  Tue, 02 Jan 2018 18:20:42 -0500

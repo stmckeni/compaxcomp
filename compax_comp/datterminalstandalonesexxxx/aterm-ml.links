@@ -1,0 +1,10 @@
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/aterm-ml.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/katerm.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/caterm.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/taterm.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/gaterm.1.gz
+/usr/bin/urxvt usr/bin/aterm-ml
+/usr/bin/urxvt usr/bin/caterm
+/usr/bin/urxvt usr/bin/gaterm
+/usr/bin/urxvt usr/bin/katerm
+/usr/bin/urxvt usr/bin/taterm

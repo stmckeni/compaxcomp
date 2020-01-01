@@ -1,0 +1,5 @@
+doc/*.txt.in
+doc/README.*.in
+doc/pod2*.tmp
+doc/rxvt.7.tbl
+mantmp/

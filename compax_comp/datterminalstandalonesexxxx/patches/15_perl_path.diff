@@ -1,0 +1,247 @@
+Description: Make shebang to perl explicit
+Author: Ryan Kavanagh <rak@debian.org>
+Origin: Debian
+Forwarded: no
+Last-Update: 2018-01-02
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+Index: rxvt-unicode/src/perl/background
+===================================================================
+--- rxvt-unicode.orig/src/perl/background	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/background	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.expr:string:background expression
+ #:META:RESOURCE:%.border:boolean:respect the terminal border
+Index: rxvt-unicode/src/perl/bell-command
+===================================================================
+--- rxvt-unicode.orig/src/perl/bell-command	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/bell-command	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ # Copyright (C) 2011 Ryan Kavanagh <ryanakca@kubuntu.org>
+ #
+Index: rxvt-unicode/src/perl/block-graphics-to-ascii
+===================================================================
+--- rxvt-unicode.orig/src/perl/block-graphics-to-ascii	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/block-graphics-to-ascii	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/clipboard-osc
+===================================================================
+--- rxvt-unicode.orig/src/perl/clipboard-osc	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/clipboard-osc	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/confirm-paste
+===================================================================
+--- rxvt-unicode.orig/src/perl/confirm-paste	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/confirm-paste	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/digital-clock
+===================================================================
+--- rxvt-unicode.orig/src/perl/digital-clock	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/digital-clock	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/eval
+===================================================================
+--- rxvt-unicode.orig/src/perl/eval	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/eval	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/example-refresh-hooks
+===================================================================
+--- rxvt-unicode.orig/src/perl/example-refresh-hooks	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/example-refresh-hooks	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/keysym-list
+===================================================================
+--- rxvt-unicode.orig/src/perl/keysym-list	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/keysym-list	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/kuake
+===================================================================
+--- rxvt-unicode.orig/src/perl/kuake	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/kuake	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.hotkey:string:activation hotkey keysym
+ 
+Index: rxvt-unicode/src/perl/matcher
+===================================================================
+--- rxvt-unicode.orig/src/perl/matcher	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/matcher	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ # Author: Tim Pope <rxvt-unicodeNOSPAM@tpope.org>
+ #         Bob Farrell <robertanthonyfarrell@gmail.com>
+Index: rxvt-unicode/src/perl/option-popup
+===================================================================
+--- rxvt-unicode.orig/src/perl/option-popup	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/option-popup	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/overlay-osc
+===================================================================
+--- rxvt-unicode.orig/src/perl/overlay-osc	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/overlay-osc	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/readline
+===================================================================
+--- rxvt-unicode.orig/src/perl/readline	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/readline	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/remote-clipboard
+===================================================================
+--- rxvt-unicode.orig/src/perl/remote-clipboard	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/remote-clipboard	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.store:string:the command used to store the selection
+ #:META:RESOURCE:%.fetch:string:the command used to fetch the selection
+Index: rxvt-unicode/src/perl/searchable-scrollback
+===================================================================
+--- rxvt-unicode.orig/src/perl/searchable-scrollback	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/searchable-scrollback	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ # this extension implements scrollback buffer search
+ 
+Index: rxvt-unicode/src/perl/selection
+===================================================================
+--- rxvt-unicode.orig/src/perl/selection	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/selection	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.pattern-0:string:first selection pattern
+ 
+Index: rxvt-unicode/src/perl/selection-autotransform
+===================================================================
+--- rxvt-unicode.orig/src/perl/selection-autotransform	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/selection-autotransform	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.:string:autotransform expression
+ 
+Index: rxvt-unicode/src/perl/selection-pastebin
+===================================================================
+--- rxvt-unicode.orig/src/perl/selection-pastebin	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/selection-pastebin	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:%.cmd:string:the command to run create a new pastebin
+ #:META:RESOURCE:%.url:string:the url template for new pastebins
+Index: rxvt-unicode/src/perl/selection-popup
+===================================================================
+--- rxvt-unicode.orig/src/perl/selection-popup	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/selection-popup	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:url-launcher:string:shell command to use
+ 
+Index: rxvt-unicode/src/perl/tabbed
+===================================================================
+--- rxvt-unicode.orig/src/perl/tabbed	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/tabbed	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ #:META:RESOURCE:tabbar-fg:colour:tab bar foreground colour
+ #:META:RESOURCE:tabbar-bg:colour:tab bar background colour
+Index: rxvt-unicode/src/perl/urxvt-popup
+===================================================================
+--- rxvt-unicode.orig/src/perl/urxvt-popup	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/urxvt-popup	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ # this extension implements popup-menu functionality for urxvt. it works
+ # together with the urxvt::popup class - "no user serviceable parts inside".
+Index: rxvt-unicode/src/perl/xim-onthespot
+===================================================================
+--- rxvt-unicode.orig/src/perl/xim-onthespot	2018-01-02 16:10:46.937812322 -0500
++++ rxvt-unicode/src/perl/xim-onthespot	2018-01-02 16:10:46.933812298 -0500
+@@ -1,4 +1,4 @@
+-#! perl
++#! /usr/bin/perl
+ 
+ =head1 NAME
+ 
+Index: rxvt-unicode/src/perl/selection-to-clipboard
+===================================================================
+--- rxvt-unicode.orig/src/perl/selection-to-clipboard	2018-01-02 16:10:39.301766257 -0500
++++ rxvt-unicode/src/perl/selection-to-clipboard	2018-01-02 16:11:11.577960967 -0500
+@@ -1,4 +1,4 @@
+-#! perl -w
++#! /usr/bin/perl -w
+ 
+ =head1 NAME
+ 

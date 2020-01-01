@@ -1,0 +1,77 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+include /usr/share/dpkg/pkg-info.mk
+
+DEB_HOST_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+PACKAGE_DIR=$(CURDIR)/debian/rxvt-unicode
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	    --host=$(DEB_HOST_GNU_TYPE) \
+	    --build=$(DEB_BUILD_GNU_TYPE) \
+	    --mandir=\$${prefix}/share/man \
+	    --infodir=\$${prefix}/share/info \
+	    --enable-256-color \
+	    --enable-combining \
+	    --enable-fading \
+	    --enable-font-styles \
+	    --enable-iso14755 \
+	    --enable-keepscrolling \
+	    --enable-lastlog \
+	    --enable-mousewheel \
+	    --enable-next-scroll \
+	    --enable-perl \
+	    --enable-pixbuf \
+	    --enable-pointer-blank \
+	    --enable-rxvt-scroll \
+	    --enable-selectionscrolling \
+	    --enable-slipwheeling \
+	    --enable-smart-resize \
+	    --enable-startup-notification \
+	    --enable-transparency \
+	    --enable-unicode3 \
+	    --enable-utmp \
+	    --enable-warnings \
+	    --enable-wtmp \
+	    --enable-xft \
+	    --enable-xim \
+	    --enable-xterm-scroll \
+	    --with-term=rxvt-unicode-256color
+	perl -pe s,..tag.CXX,, -i src/Makefile
+	if expr $(DEB_HOST_GNU_TYPE) : 'alpha-linux-gnu\|sparc-linux-gnu' > /dev/null; then \
+		echo "#define EV_USE_EPOLL 0" >> config.h; \
+	fi
+
+override_dh_auto_build:
+	# We patch the documentation and need to rebuild it
+	$(MAKE) -C doc clean alldoc
+	dh_auto_build
+
+override_dh_auto_install:
+	install -D -m 644 debian/app-defaults $(PACKAGE_DIR)/etc/X11/app-defaults/URxvt
+	dh_auto_install
+
+override_dh_installchangelogs:
+	dh_installchangelogs Changes
+
+override_dh_fixperms:
+	dh_fixperms
+	chgrp utmp $(PACKAGE_DIR)/usr/bin/urxvt $(PACKAGE_DIR)/usr/bin/urxvtd
+	chmod g+s $(PACKAGE_DIR)/usr/bin/urxvt $(PACKAGE_DIR)/usr/bin/urxvtd
+	chmod +x $(PACKAGE_DIR)/usr/lib/$(DEB_HOST_MULTIARCH)/urxvt/perl/*
+
+override_dh_gencontrol:
+	dh_gencontrol
+	# We need to make our version greater than the rxvt version to allow for
+	# upgrades
+	dh_gencontrol -prxvt -- -v1:2.7.10-7.1+urxvt$(DEB_VERSION)
+	dh_gencontrol -prxvt-ml -- -v1:2.7.10-7.1+urxvt$(DEB_VERSION)

@@ -1,0 +1,6 @@
+rxvt-unicode: setgid-binary usr/bin/urxvt 2755 root/utmp
+rxvt-unicode: setgid-binary usr/bin/urxvtd 2755 root/utmp
+rxvt-unicode: spelling-error-in-copyright Garcia Garcia (duplicate word) Garcia
+spelling-error-in-copyright Garcia Garcia (duplicate word) Garcia
+conflicts-with-version rxvt-unicode-lite (<< 9.22-2)
+conflicts-with-version rxvt-unicode-256color (<< 9.22-2)

@@ -1,0 +1,4 @@
+debian/*.xpm usr/share/pixmaps
+debian/*.desktop usr/share/applications
+debian/urxvtcd usr/bin
+debian/tmp/usr/

@@ -1,0 +1,5 @@
+usr/bin/urxvt usr/bin/rxvt
+usr/bin/urxvt usr/bin/rxvt-unicode
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/rxvt.1.gz
+usr/share/man/man1/urxvt.1.gz usr/share/man/man1/rxvt-unicode.1.gz
+usr/share/pixmaps/urxvt.xpm usr/share/pixmaps/urxvt_32x32.xpm
