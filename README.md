@@ -1,5 +1,7 @@
 # compaxcomp
-a ide written in pyqt5 for addressing specific handicaps. 
+a ide written in pyqt5 for addressing specific handicaps,particularly ADHD.
+
+*as of january 6th,2020, this is not an official demo or build, it is simply to test out and add new features as they come up.*
 
 all the files located in compax_comp folder. nem.py is where the main file is contained.
 
