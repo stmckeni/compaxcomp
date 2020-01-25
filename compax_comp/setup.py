@@ -9,6 +9,6 @@ ext_modules=[
 
 setup(
   name = 'compax_comp',
-  cmdclass = {'build_ext': build_ext},
+  cmdclass = {'build_nem': build_ext},
   ext_modules = ext_modules
 )

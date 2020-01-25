@@ -5,8 +5,9 @@
 from libc.stdlib cimport *
 from libc.stdio cimport *
 
-
-
+from bs4 import BeautifulSoup as BS
+import time
+import re
 import os
 import sys
 import requests
@@ -44,6 +45,7 @@ cdef extern from "jelexus.c":
 
 
 """
+   
 
 #download and stream
 def _download_and_stream(url=
@@ -328,8 +330,18 @@ class DaTerminal(QWidget):
     def set_dynamic_scale(dis,dynamic_result=True):
         dis.dynamic_scale = dynamic_result
 
+#handle dash blank
+class Ae_web_page(QWebEnginePage):
+    def createWindow(dis, _type):
+        page = QWebEnginePage(dis)
+        page.urlChanged.connect(dis.on_url_changed)
+        return page
 
-
+    @pyqtSlot(QUrl)
+    def on_url_changed(dis,url):
+        page = dis.sender()
+        dis.setUrl(url)
+        page.deleteLater()
 
 
 
@@ -343,6 +355,7 @@ class da_Web_Browser(QWidget):
         dis.browser = QWebEngineView()
         #set the web browser settings object
         #dis.browser_settings = dis.browser.settings()
+
         dis.browser_settings = QWebEngineSettings.globalSettings()
         #set plugins and javascript to be enabled
         dis.browser_settings.setAttribute(QWebEngineSettings.PluginsEnabled,True)
@@ -353,9 +366,14 @@ class da_Web_Browser(QWidget):
         dis.browser_settings.screenCaptureEnabled = True
         dis.browser_settings.webGLEnabled = True
         
-   
+        dis._dis_da_url = "https://www.bitchute.com/video/oPmPhCZoWmo9"
         #set homepage by default
-        dis.browser.setUrl(QUrl("https://mgtow.com"))
+        page = Ae_web_page(dis.browser)
+        dis.browser.setPage(page)
+        dis.browser.load(QUrl(dis._dis_da_url))
+
+        dis._da_source_html_data = requests.get(dis._dis_da_url).text
+        
         #what to do on the changed url
         #dis.browser.urlChanged.connect(lambda : dis.browser.renew_urlbar(QUrl("https://mgtow.com"),dis) )
         #when the page finishes loading
@@ -461,9 +479,27 @@ class da_Web_Browser(QWidget):
     #set up connection to load a new page
     @pyqtSlot()
     def load_da_page(dis):
+        dis._dis_da_url = dis.url_box.text()
         #load the webpage
-        dis.browser.load(QUrl(dis.url_box.text()))
+        dis.browser.load(QUrl(dis._dis_da_url))
+        #call the video capture intitally
+        dis._sq_video_init()
+       
+       
+
+
+
+
+
         print("fucking page is loaded. fuck off")
+
+
+
+    #set up to intercept and download videos
+    @pyqtSlot()
+    def _sq_video_init(dis):
+        #check if page contains either a mp4 file or a youtube type style m3u8 data and if it does, open the video player with the temporary data
+        print("sq video init")
 
 
     #set up a back function 
@@ -592,7 +628,87 @@ class daHomeBlot(QWidget):
          
         
         
+ 
+"""""
+#set the browser thread
+class Browser_thread(QThread):
+    signal = pyqtSignal('PyQt_PyObject')
+
+    def __init__(this_thread):
+        QThread.__init__(this_thread)
         
+       
+        
+       
+
+    
+    def run(this_thread):
+        print("thwead runz!")
+        
+     
+
+
+class w_runnable(QRunnable):
+    def __init__(dis,url,fn,*args,**kwargs):
+        super(w_runnable,dis).__init__()
+
+        dis.url = url
+        dis.fn = fn
+        dis.args = args
+        dis.kwargs = kwargs
+
+
+    @pyqtSlot()
+    def run(dis):
+        dis.fn(*dis.args,**dis.kwargs)
+        _check_video_tag = "<video "
+        _check_mp4 = ".mp4"
+        _check_m8u3 = ".m8u3"
+        _1_da_source_html_data = str(requests.get(dis.url).text)
+        #raw html get request
+        _1_a = requests.get(dis.url)
+        print("get status: find mp4")
+        _1_mp4_find_status = _1_da_source_html_data.find(_check_mp4)
+        print(_1_mp4_find_status)
+      
+        if(_1_mp4_find_status < 0):
+            print("video find failed")
+        else:
+            print("mp4 found on page")
+            _1_soup_bs_parsed_data = BS(_1_a.content,'html.parser')
+       
+            print("<end of FUCKING DIAGNOSTICS>")
+            print("flamboyancy revee")
+            print("status report")
+            #https://www.bitchute.com/video/oPmPhCZoWmo9/
+            print(_1_mp4_find_status)
+            if(_1_mp4_find_status < 0):
+                print("video find failed rot in hell!")
+            else:
+                #prettify data
+                print(_1_soup_bs_parsed_data.prettify())
+
+                dis._1_text_output = da_distractfree_writer()
+                dis._1_text_output.setText(_1_da_source_html_data)
+                dis._1_text_output.show()
+                xdata = _1_soup_bs_parsed_data.find('source')
+           
+                print("is it over?")
+                print(xdata['src'])
+            
+                _1_udemy_soup_bs_parsed_data = BS(_1_a.content,'html.parser')
+                udemy_capture = _1_udemy_soup_bs_parsed_data.find('video')
+                dis.veek = da_extern_video_Window()
+                if(xdata['src']):
+                    dis.veek._set_url_link(str(xdata['src']))
+                elif(udemy_capture['src']):
+                    dis.veek._set_url_link(str(udemy_capture['src']))
+                else:
+                    dis.veek._set_url_link("https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4")
+                dis.veek._init_handle_video_nuttin()
+                dis.veek.show()
+
+"""
 
 
 
@@ -602,7 +718,9 @@ class daMainWindow(QMainWindow):
     def __init__(this_object):
         super(daMainWindow,this_object).__init__()
         print("damainwindowlives")
-         
+        #create the threadpool
+        this_object.threadpool = QThreadPool()
+        print("Multithreading technology with a maximum of %d fucking threads" % this_object.threadpool.maxThreadCount())
         this_object.Da_System_Icon = QIcon( "images/anutechlogo.png")
 
         #set current file focus path
@@ -671,7 +789,9 @@ class daMainWindow(QMainWindow):
         #set the doc tab widget to use on the document area
         this_object.editoreDock.setWidget(this_object.editorTabs)
         #set the widget to be placed on the top or center by default
-        this_object.addDockWidget(Qt.TopDockWidgetArea,this_object.editoreDock)
+        this_object.addDockWidget(Qt.TopDockWidgetArea,this_object.editoreDock) 
+
+
 
 
 
@@ -704,25 +824,37 @@ class daMainWindow(QMainWindow):
         #set up the regular control area
         this_object.reg_ct_list = []
 
-        #set the web browser by default
-        nebba = da_Web_Browser()
-        this_object._add_control_object(nebba)
-        #set the control docks button for reg dock area
+        
+        """set the control docks button for reg dock area
         dissadint_dock = De_da_dock_button()
         this_object._add_reg_control_object(dissadint_dock)
-
-
-
+        """
+        
         #initialize the control list
         this_object.init_control_area()
         #initialize the regular control area
         this_object._init_reg_control_area()
+        this_object.kabito = da_Web_Browser()
+        
+        this_object.kabito.show()
+        
         #initialize the toolbars
         this_object.initialize_toolbar()
         #start the program
         this_object.initialize_program()
+      
         
         
+        
+    #initalize the browser
+    def _web_init_pee_dee(this_object):
+        #set the web browser by default
+        
+       
+        print("thread connect")
+
+
+
     #set up for the regular control area
     def _init_reg_control_area(this_object):
         print("reg control area triggered")
@@ -782,6 +914,7 @@ class daMainWindow(QMainWindow):
         print_action = QAction(this_object.Da_System_Icon,"print da file",this_object)
         terminal_open_action = QAction(this_object.Da_System_Icon,"open da terminal",this_object)
         show_n_hyde_dock_action = QAction(this_object.Da_System_Icon,"Show hidden docks",this_object)
+        show_n_hide_web_browser_action = QAction(this_object.Da_System_Icon,"Show web browser",this_object)
         
         #set status tips
         open_code_action.setStatusTip("enter Upwork proposal workspace")
@@ -792,6 +925,7 @@ class daMainWindow(QMainWindow):
         save_file_action.setStatusTip("save the file")
         terminal_open_action.setStatusTip("open da terminal")
         show_n_hyde_dock_action.setStatusTip("Show the hidden dockable sections of your IDE. Useful in case you close them out and need them back up")
+        show_n_hide_web_browser_action.setStatusTip("show the companion web browser")
         #set triggers (QAction().triggered.connect(function))
         open_code_action.triggered.connect(this_object.set_ide_workspace)
         open_writer_action.triggered.connect(this_object.set_da_distractfree_writer)
@@ -801,6 +935,7 @@ class daMainWindow(QMainWindow):
         open_file_action.triggered.connect(this_object.file_open)
         terminal_open_action.triggered.connect(this_object.__open_da_terminal)
         show_n_hyde_dock_action.triggered.connect(this_object._id_da_sho_n_hyde_dock)
+        show_n_hide_web_browser_action.triggered.connect(this_object._we_show_da_web_browser)
         #add each action to the menu and toolbar respectively
         this_object.workspace_menu.addAction(open_code_action)
         this_object.workspace_toolbar.addAction(open_code_action)
@@ -808,6 +943,8 @@ class daMainWindow(QMainWindow):
         this_object.workspace_toolbar.addAction(open_writer_action)
         this_object.workspace_menu.addAction(show_n_hyde_dock_action)
         this_object.workspace_toolbar.addAction(show_n_hyde_dock_action)
+        this_object.workspace_menu.addAction(show_n_hide_web_browser_action)
+        this_object.workspace_toolbar.addAction(show_n_hide_web_browser_action)
         this_object.file_menu.addAction(open_file_action)
         this_object.file_toolbar.addAction(open_file_action)
         this_object.file_menu.addAction(show_n_hyde_dock_action)
@@ -830,7 +967,13 @@ class daMainWindow(QMainWindow):
         
         #set the file toolbar
         
-        
+
+    #set the web browser
+    @pyqtSlot()
+    def _we_show_da_web_browser(this_object):
+        if(this_object.kabito.hide()):
+            this_object.kabito.show()
+        this_object.kabito.show()
         
         
     #set the ide workspace to select
@@ -1141,11 +1284,7 @@ cdef start_main_compax_comp():
     
     app = QApplication(sys.argv)
     compax_executable = daMainWindow()
-    veek = da_extern_video_Window()
-    veek._set_url_link("https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4")
- 
-    veek._init_handle_video_nuttin()
-    veek.show()
+
     if compax_executable:
         sys.exit(app.exec_())
 
