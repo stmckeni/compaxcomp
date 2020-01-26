@@ -6,7 +6,7 @@ to get started go to the terminal where the cython main and python main is. setu
 
 From there you need to compile and build for parsing via python as I included cython for c/c++ integration.
 
-in your terminal type " python3 setup.py build_ext --inplace " and then run the .py main compax script and you should be good to go. 
+in your terminal type " python3 setup.py build_nem --inplace " and then run the .py main compax script and you should be good to go. 
 
 it is pyinstaller friendly so you could technically create an official executable.
 
