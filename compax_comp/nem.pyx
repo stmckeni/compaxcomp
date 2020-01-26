@@ -5,7 +5,7 @@
 from libc.stdlib cimport *
 from libc.stdio cimport *
 
-from bs4 import BeautifulSoup as BS
+
 import time
 import re
 import os
