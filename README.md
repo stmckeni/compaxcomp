@@ -27,3 +27,20 @@ as of january 1st, 2020, you will need to use py installer to get an executable 
 had to add extended extension. You will need to add a temp folder and in that folder you will need to add a blank file called jigga.mp4 and the video popups will use that as a temp file to write to. I tried to upload folder to github but this time around, there is no way to add a folder, or upload it, even in chrome. 
 
 if anything in your terminal cd to the compax_comp folder and write mkdir temp and in the temp folder add jigga.mp4 for the temp raw container for mp4 file that will automatically download the video files. 
+
+
+
+*EXPORTING OR DEPLOYING on x11*
+I used pyinstaller and used onefile install mode. I had to include hidden dependencies so first you need to install pyinstaller so go to terminal of the linux os you are using. then cd to the source root where the setup.py and compax_comp.py files reside
+
+python3 -m pip install --user --upgrade pyinstaller
+
+To install the current development version use:
+
+pip install https://github.com/pyinstaller/pyinstaller/tarball/develop
+
+anyway since you have pyinstaller installed now you need to export everything and put it as single executable. To do this you need to open your terminal to all the source code and type the following (repetitive but it worked! )
+
+ pyinstaller --onefile --hiddenimport 'requests' --hiddenimport 'PyQt5' --hiddenimport 'PyQt5.QtWidgets' --hiddenimport 'PyQt5.QtWebChannel' --hiddenimport 'PyQt5.QtWebEngine' --hiddenimport 'PyQt5.QtNetwork' --hiddenimport 'PyQt5.QtWebEngineCore' --hiddenimport 'PyQt5.QtWebEngineWidgets' --hiddenimport 'PyQt5.QtMultimedia' --hiddenimport 'PyQt5.QtMultimediaWidgets'  compax_comp.py
+
+and it will work! it did for me.
